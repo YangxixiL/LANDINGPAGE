@@ -17,6 +17,8 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      DATA_URL: ${{ secrets.DATA_URL }}
     defaults:
       run:
         working-directory: app
