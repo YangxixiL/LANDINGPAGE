@@ -17,11 +17,7 @@ const nextConfig: NextConfig = {
         protocol: "http",
         hostname: "localhost",
         port: "8081",
-      },
-      {
-        protocol: "https",
-        hostname: "cdn.prod.website-files.com",
-      },
+      }
     ],
   },
 };

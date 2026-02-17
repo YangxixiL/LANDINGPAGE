@@ -40,9 +40,14 @@ jobs:
         run: npm ci
 
       - name: Validate DATA_URL
-        run: test -n "$DATA_URL" || (echo "DATA_URL secret is missing" && exit 1)
+        env:
+          DATA_URL: ${{ secrets.DATA_URL }}
+        run: |
+          node -e "const v = process.env.DATA_URL?.trim(); if (!v) { console.error('DATA_URL secret is missing'); process.exit(1); } console.log('DATA_URL is set for build.');"
 
       - name: Build
+        env:
+          DATA_URL: ${{ secrets.DATA_URL }}
         run: npm run build
 
       - name: Upload artifact
