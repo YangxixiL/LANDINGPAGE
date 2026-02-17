@@ -4,13 +4,13 @@ Root workspace for the ReciTAC landing page and local Docker file server.
 
 ## Structure
 
-- `src/app`: Next.js application
+- `app`: Next.js application
 - `docker`: Docker Compose and Nginx config for serving static files
 
 ## Run the Next.js app
 
 ```bash
-cd src/app
+cd app
 npm install
 npm run dev
 ```
