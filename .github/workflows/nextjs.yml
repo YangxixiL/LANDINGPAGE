@@ -45,6 +45,11 @@ jobs:
         run: |
           node -e "const v = process.env.DATA_URL?.trim(); if (!v) { console.error('DATA_URL secret is missing'); process.exit(1); } console.log('DATA_URL is set for build.');"
 
+      - name: Echo DATA_URL
+        env:
+          DATA_URL: ${{ secrets.DATA_URL }}
+        run: echo "DATA_URL=$DATA_URL"
+
       - name: Build
         env:
           DATA_URL: ${{ secrets.DATA_URL }}
