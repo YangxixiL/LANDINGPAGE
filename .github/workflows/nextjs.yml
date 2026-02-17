@@ -39,6 +39,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Validate DATA_URL
+        run: test -n "$DATA_URL" || (echo "DATA_URL secret is missing" && exit 1)
+
       - name: Build
         run: npm run build
 
