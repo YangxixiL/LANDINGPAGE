@@ -1,8 +1,13 @@
 import type { NextConfig } from "next";
 
+const basePath = "/LANDINGPAGE";
+
 const nextConfig: NextConfig = {
   output: "export",
+  basePath,
+  assetPrefix: `${basePath}/`,
   images: {
+    unoptimized: true,
     dangerouslyAllowLocalIP: true,
     remotePatterns: [
       {
@@ -22,7 +27,7 @@ const nextConfig: NextConfig = {
       {
         protocol: "https",
         hostname: "data.ceotr.ca",
-      }
+      },
     ],
   },
 };
