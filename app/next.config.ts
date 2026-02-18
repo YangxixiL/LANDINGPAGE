@@ -17,6 +17,10 @@ const nextConfig: NextConfig = {
         protocol: "http",
         hostname: "localhost",
         port: "8081",
+      },
+      {
+        protocol: "https",
+        hostname: "data.ceotr.ca",
       }
     ],
   },

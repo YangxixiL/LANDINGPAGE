@@ -91,7 +91,7 @@ export async function getFolderData(): Promise<FolderDataMap> {
 
   const normalizedBaseUrl = dataUrl.endsWith("/") ? dataUrl : `${dataUrl}/`;
   try {
-    const indexResponse = await fetch(normalizedBaseUrl, { cache: "no-store" });
+    const indexResponse = await fetch(normalizedBaseUrl, { next: { revalidate: 3600 } });
     if (!indexResponse.ok) {
       throw new Error(`Failed to fetch DATA_URL index: ${indexResponse.status}`);
     }
@@ -106,7 +106,7 @@ export async function getFolderData(): Promise<FolderDataMap> {
         }
 
         const dataJsonUrl = new URL("data.json", folderUrl);
-        const response = await fetch(dataJsonUrl, { cache: "no-store" });
+        const response = await fetch(dataJsonUrl, { next: { revalidate: 3600 } });
         if (!response.ok) {
           return null;
         }
@@ -121,8 +121,9 @@ export async function getFolderData(): Promise<FolderDataMap> {
       throw new Error("No folder data.json files found under DATA_URL.");
     }
     return folderData;
-  } catch {
-    throw new Error("Failed to load folder data from DATA_URL.");
+  } catch (error) {
+    const detail = error instanceof Error ? error.message : String(error);
+    throw new Error(`Failed to load folder data from DATA_URL (${normalizedBaseUrl}): ${detail}`);
   }
 }
 
